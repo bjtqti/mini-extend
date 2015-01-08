@@ -1,41 +1,32 @@
+//创建一个命名空间
 var Xut = {};
 
 Xut.CoreObject = function(){};
 
+//实现继承
 Xut.CoreObject.extend = function(props){
   var init, subObj;
 
   props = props || {};
-  // Set up the constructor using the supplied init method
-  // or using the init of the parent object
+  // 使用init创建构造函数
+  // 如果没有提供init方法，则取父类的init，如果父类也没有，则用一个空方法代替
  
   init = props['init'] || props.init || this.prototype['init'] || this.prototype.init || function(){};
-  // In Resig's simple class inheritance (previously used) the constructor
-  //  is a function that calls `this.init.apply(arguments)`
-  // However that would prevent us from using `ParentObject.call(this);`
-  //  in a Child constuctor because the `this` in `this.init`
-  //  would still refer to the Child and cause an inifinite loop.
-  // We would instead have to do
-  //    `ParentObject.prototype.init.apply(this, argumnents);`
-  //  Bleh. We're not creating a _super() function, so it's good to keep
-  //  the parent constructor reference simple.
+  // 使用一个闭包来避免循环引用的问题
 
   subObj = function(){
     init.apply(this, arguments);
   };
 
-  // Inherit from this object's prototype
+  // 继承父类的原型
   subObj.prototype = Xut.obj.create(this.prototype);
-  // Reset the constructor property for subObj otherwise
-  // instances of subObj would have the constructor of the parent Object
+  // 重置构造函数
   subObj.prototype.constructor = subObj;
  
-  // Make the class extendable
+  // 使得子类也可以被继承
   subObj.extend = Xut.CoreObject.extend;
-  // Make a function for creating instances
-  subObj.create = Xut.CoreObject.create;
 
-  // Extend subObj's prototype with functions and other properties from props
+  // 把props上的属性和方法都加到subObj的原型上去
   for (var name in props) {
     if (props.hasOwnProperty(name)) {
       subObj.prototype[name] = props[name];
@@ -73,21 +64,6 @@ Xut.obj.create = Object.create || function(obj){
   return new F();
 };
 
-/**
- * Create a new instace of this Object class
- *
- *     var myAnimal = Animal.create();
- *
- * @return {Xut.CoreObject} An instance of a CoreObject subclass
- * @this {*}
- */
-Xut.CoreObject.create = function(){
-  // Create a new object that inherits from this object's prototype
-  var inst = Xut.obj.create(this.prototype);
  
-  // Apply this constructor function to the new object
-  this.apply(inst, arguments);
 
-  // Return the new object
-  return inst;
-};
+

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <script type="text/javascript" src="../core.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+ var VideoClass = Xut.CoreObject.extend({
+    init : function(url){
+      this.url = url;
+    } 
+ });
+
+VideoClass.prototype.play = function(){
+  alert(this)
+}
+
+var Video = VideoClass.extend();
+
+var v = new Video('xxx.xxx.xxx')
+
+v.play();
+
+//基本原理演示
+ 
+ //A构造函数
+function A(name){
+   this.name = name
+   this.age = 8
+}
+
+A.prototype.play = function(){
+  alert('b')
+  console.log(this)
+}
+
+
+//B构造函数
+function B(name,age){
+  //借用A构造函数
+  A.apply(this,arguments);
+}
+
+//获取A的原型方法
+//覆盖B的原型方法
+//通过create断开与A的引用关系
+B.prototype = Object.create(A.prototype);
+//由于是借用关系，终究都是要还的
+B.prototype.constructor = B;
+
+//B原型上的自有方法
+B.prototype.say = function(){
+  alert('b')
+  console.log(this)
+}
+
+var b = new B('frog',33);
+
+
+
+</script>
+</body>
+</html>
