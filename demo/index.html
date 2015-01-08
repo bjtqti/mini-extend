@@ -15,7 +15,7 @@
  });
 
 VideoClass.prototype.play = function(){
-  alert(this)
+  alert(this.url)
 }
 
 var Video = VideoClass.extend();
@@ -48,6 +48,7 @@ function B(name,age){
 //覆盖B的原型方法
 //通过create断开与A的引用关系
 B.prototype = Object.create(A.prototype);
+
 //由于是借用关系，终究都是要还的
 B.prototype.constructor = B;
 
