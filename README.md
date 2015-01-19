@@ -7,46 +7,83 @@
 
 ### 基本用法
 --------
-1.创建一个基类
+1.怎样创建一个最简单的类
+
+```javascript 
+var Video = Xut.CoreObject.extend({});
+
+```
+2.怎样创建一个类并指定构造函数
 
 ```javascript 
 var Video = Xut.CoreObject.extend({
-    init : function(url){
-      this.url = url;
+    init : function(){
+    	//初始化代码放这里
+    	//this.name = 'video';
     } 
  });
 
+```
+3. 怎样扩展类的原型
+
+```javascript
+//方式一:
 Video.prototype.play = function(){
-	
-	alert(this.url)
+	alert(this.name)
 }
+//方式二:
+var Video = Xut.CoreObject.extend({
+    init : function(){
+    	//初始化代码放这里
+    	//this.name = 'video';
+    },
+    //直接在这里给出
+    play : function() {
+		alert(this.name);
+	}
+ });
 
 ```
-2.基于基类创建子类
+4.如何继承父类
 
 ```javascript
 var Player = Video.extend({
-	name : 'miniplayer'
+	pause : function(){
+		alert('paused')
+	},
+	error : function(){
+		alert('error')
+	}
 });
 
 var Media = Video.extend({
-	name : 'meidaplayer'
+	name : 'meidaplayer',
+	stop : function(){
+		alert('stop')
+	}
 })
 
 ```
 
-3.重写父类的原型方法
+5.子类怎样重写继承的方法
 
 ```javascript
+//方式一
 Player.prototype.play = function(){
 	alert(this.name)
 }
-
-//Media的play方法不会受上面改写的影响
+//方式二
+var Player = Video.extend({
+	init : function(){
+		//重新定义构造函数
+		this.name = 'new Player init'
+	}
+});
 
 ```
 
-4. 创建对象实例
+6. 如何创建对象实例
+
 ```javascript
 var p = Player('www.xut.com/music.mp3');
 p.play();
