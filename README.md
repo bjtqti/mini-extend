@@ -25,6 +25,7 @@ var Video = Xut.CoreObject.extend({
  });
 
 ```
+
 3. 怎样扩展类的原型
 
 ```javascript
@@ -45,6 +46,7 @@ var Video = Xut.CoreObject.extend({
  });
 
 ```
+
 4.如何继承父类
 
 ```javascript
