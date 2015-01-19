@@ -8,13 +8,13 @@
 ### 基本用法
 --------
 
-1.怎样创建一个最简单的类作为基类
+1. 怎样创建一个最简单的类作为基类
 
 ```javascript 
 var Video = Xut.CoreObject.extend();
 
 ```
-2.怎样创建一个类并指定构造函数
+2. 怎样创建一个类并指定构造函数
 
 ```javascript 
 var Video = Xut.CoreObject.extend({
@@ -47,7 +47,7 @@ var Video = Xut.CoreObject.extend({
 
 ```
 
-4.如何继承父类
+4. 如何继承父类
 
 ```javascript
 
@@ -69,7 +69,7 @@ var Media = Video.extend({
 
 ```
 
-5.子类怎样重写继承的方法
+5. 子类怎样重写继承的方法
 
 ```javascript
 //方式一
