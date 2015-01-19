@@ -8,13 +8,13 @@
 ### 基本用法
 --------
 
-1. 怎样创建一个最简单的类作为基类
+1.怎样创建一个最简单的类作为基类
 
 ```javascript 
 var Video = Xut.CoreObject.extend();
 
 ```
-2. 怎样创建一个类并指定构造函数
+2.怎样创建一个类并指定构造函数
 
 ```javascript 
 var Video = Xut.CoreObject.extend({
@@ -26,8 +26,7 @@ var Video = Xut.CoreObject.extend({
 
 ```
 
-3. 怎样扩展类的原型
-
+3.怎样扩展类的原型
 ```javascript
 //方式一:
 Video.prototype.play = function(){
@@ -47,8 +46,7 @@ var Video = Xut.CoreObject.extend({
 
 ```
 
-4. 如何继承父类
-
+4.如何继承父类
 ```javascript
 
 var Player = Video.extend({
@@ -68,8 +66,7 @@ var Media = Video.extend({
 })
 
 ```
-
-5. 子类怎样重写继承的方法
+5.子类怎样重写继承的方法
 
 ```javascript
 //方式一
@@ -87,8 +84,7 @@ var Player = Video.extend({
 
 ```
 
-6. 如何创建对象实例
-
+6.如何创建对象实例
 ```javascript
 var p = Player('www.xut.com/music.mp3');
 p.play();
