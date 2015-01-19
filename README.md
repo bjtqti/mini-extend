@@ -7,10 +7,10 @@
 
 ### 基本用法
 --------
-1.怎样创建一个最简单的类
+1.怎样创建一个最简单的类作为基类
 
 ```javascript 
-var Video = Xut.CoreObject.extend({});
+var Video = Xut.CoreObject.extend();
 
 ```
 2.怎样创建一个类并指定构造函数
@@ -47,6 +47,7 @@ var Video = Xut.CoreObject.extend({
 4.如何继承父类
 
 ```javascript
+
 var Player = Video.extend({
 	pause : function(){
 		alert('paused')
@@ -72,6 +73,7 @@ var Media = Video.extend({
 Player.prototype.play = function(){
 	alert(this.name)
 }
+
 //方式二
 var Player = Video.extend({
 	init : function(){
