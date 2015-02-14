@@ -32,6 +32,7 @@ Xut.CoreObject.extend = function(props){
       if(typeof(props[name]) == 'function' && typeof(subObj.prototype[name])=='function'){
           subObj.prototype[name] = (function(name,fn,bak){
             return function(){
+              //保存父类的同名方法
               this.base = bak;
               return fn.apply(this,arguments);
             }
