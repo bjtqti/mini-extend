@@ -29,8 +29,17 @@ Xut.CoreObject.extend = function(props){
   // 把props上的属性和方法都加到subObj的原型上去
   for (var name in props) {
     if (props.hasOwnProperty(name)) {
-      //替换父类的同名属性和方法
-      subObj.prototype[name] = props[name];
+      if(typeof(props[name]) == 'function' && typeof(subObj.prototype[name])=='function'){
+          subObj.prototype[name] = (function(name,fn,bak){
+            return function(){
+              this.base = bak;
+              return fn.apply(this,arguments);
+            }
+          })(name,props[name],subObj.prototype[name]);
+      }else{
+        //替换父类的同名属性 
+        subObj.prototype[name] = props[name];
+      }
     }
   }
 

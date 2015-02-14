@@ -18,12 +18,18 @@ VideoClass.prototype.play = function(){
   alert(this.url)
 }
 
-var Video = VideoClass.extend();
+var Video = VideoClass.extend({
+ 
+  play : function(){
+    this.base();
+    alert('play')
+  }
+});
 
 var v = new Video('xxx.xxx.xxx')
 
 v.play();
-
+ 
 //基本原理演示
  
  //A构造函数
